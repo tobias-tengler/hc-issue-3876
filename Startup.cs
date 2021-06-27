@@ -13,6 +13,7 @@ using System.Threading;
 using HotChocolate.AspNetCore.Subscriptions.Messages;
 using HotChocolate.Execution;
 using Microsoft.Extensions.Logging;
+using HotChocolate.Fetching;
 
 public class User
 {
@@ -52,25 +53,24 @@ public class Query
 
 public class SocketInterceptor : DefaultSocketSessionInterceptor
 {
-    public SocketInterceptor(ILogger<SocketInterceptor> logger)
-    {
-
-    }
-
     public override ValueTask<ConnectionStatus> OnConnectAsync(ISocketConnection connection, InitializeConnectionMessage message, CancellationToken cancellationToken)
     {
+        Console.WriteLine("OnConnectAsync");
+
         return base.OnConnectAsync(connection, message, cancellationToken);
     }
 
     public override ValueTask OnCloseAsync(ISocketConnection connection, CancellationToken cancellationToken)
     {
-
+        Console.WriteLine("OnCloseAsync");
 
         return base.OnCloseAsync(connection, cancellationToken);
     }
 
     public override ValueTask OnRequestAsync(ISocketConnection connection, IQueryRequestBuilder requestBuilder, CancellationToken cancellationToken)
     {
+        Console.WriteLine("OnRequestAsync");
+
         return base.OnRequestAsync(connection, requestBuilder, cancellationToken);
     }
 }
